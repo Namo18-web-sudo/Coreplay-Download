@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Download CorePlay Installer</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, darkblue, black);
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .box {
+      background-color: transparent;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .download-button {
+      background-color: #1e90ff;
+      color: white;
+      padding: 15px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .download-button:hover {
+      background-color: #4682b4;
+    }
+
+    .about-link {
+      position: absolute;
+      bottom: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .about-link:hover {
+      text-decoration: underline;
+    }
+
+    .readme-note {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .not-available {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4d4d;
+    }
+
+    .feedback {
+      font-size: 16px;
+      margin-top: 10px;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="content">
+    <div class="readme-note">Please read the readme file</div>
+  </div>
+
+  <a class="about-link" href="https://coreplay-about.netlify.app/">About</a>
+
+  <script>
+    const contentDiv = document.getElementById("content");
+    const userAgent = navigator.userAgent.toLowerCase();
+    const platform = navigator.platform.toLowerCase();
+
+    const isAndroid = userAgent.includes("android");
+    const isMac = platform.includes("mac");
+    const isWindows = platform.includes("win");
+    const isLinux = platform.includes("linux") && !isAndroid;
+
+    if (isAndroid) {
+      const btn = document.createElement("a");
+      btn.className = "download-button";
+      btn.href = "https://www.dropbox.com/scl/fi/s3u0amvr39xmd2ahefwqw/CorePlayApp.apk?rlkey=8ifk7c3nh9q6liaengor5lf90&st=rlpbc2bh&dl=1";
+      btn.textContent = "Download CorePlay for Android";
+      contentDiv.appendChild(btn);
+    } else if (isWindows || isLinux) {
+      const btn = document.createElement("a");
+      btn.className = "download-button";
+      btn.href = "https://www.dropbox.com/scl/fi/v9c171kji09brqdpet43e/CorePlay-Setup-1.0.0.exe?rlkey=5fddf2oaft3vc2mnggeb74vnk&st=futf93b8&dl=1";
+      btn.textContent = "Download CorePlay for Windows/Linux";
+      contentDiv.appendChild(btn);
+    } else if (isMac) {
+      const btn = document.createElement("a");
+      btn.className = "download-button";
+      btn.href = "https://www.dropbox.com/scl/fi/i5njbxcu6poj18lo7w0xq/Coreplay.zip?rlkey=jd5ki62o523dtstc0l21kwsom&st=w2ezdv4z&dl=1";
+      btn.textContent = "Download CorePlay for Mac";
+      contentDiv.appendChild(btn);
+    } else {
+      contentDiv.innerHTML = `
+        <div class="not-available">
+          Sorry, This Is Not Available For This Device Yet
+          <div class="feedback">Send Feedback to<br>neon.stroke.official@gmail.com</div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
